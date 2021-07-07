@@ -11,7 +11,13 @@ Bootstrap a developer-friendly NextJS app configured with:
 - MobX 6
 - Material UI
 
-- ENV filed is include in repo for demo purpose.
-- Project is based as SSR APP
-- To start the APP type yarn dev in terminal
-- To start test type yarn test in terminal
+## Starting the app
+
+- First type **yarn** in terminal to install dependencies
+- To start the APP type **yarn dev** in terminal
+- To start test type **yarn test** in terminal
+- **.env** file is include in repo for demo purpose
+
+## SSR
+
+- Application is NextJS based project, with Server Side Rendering.
