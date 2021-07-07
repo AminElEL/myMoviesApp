@@ -1,4 +1,4 @@
-# Base Next app
+# DEMO Movie APP
 
 Bootstrap a developer-friendly NextJS app configured with:
 
