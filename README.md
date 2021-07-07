@@ -10,6 +10,8 @@ Bootstrap a developer-friendly NextJS app configured with:
 - SASS
 - MobX 6
 - Material UI
-- SSR
 
 - ENV filed is include in repo for demo purpose.
+- Project is based as SSR APP
+- To start the APP type yarn dev in terminal
+- To start test type yarn test in terminal

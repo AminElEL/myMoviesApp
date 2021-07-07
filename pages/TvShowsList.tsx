@@ -22,7 +22,12 @@ const TVShows: FunctionComponent = () => {
     >
       {generalStore.tvShows &&
         generalStore.tvShows.map((tvShow) => (
-          <MediaCard media={tvShow} key={tvShow.id} isMovie={false} />
+          <MediaCard
+            media={tvShow}
+            key={tvShow.id}
+            isMovie={false}
+            id={tvShow.id}
+          />
         ))}
     </InfiniteScroll>
   )

@@ -9,12 +9,14 @@ import Switch from '@material-ui/core/Switch'
 import { useStores } from '../hooks/useStores'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 type MediaCardProps = {
   media: IMedia
-  isMovie?: boolean
+  isMovie: boolean
+  id: number
 }
 
-const MediaCard: FC<MediaCardProps> = ({ media, isMovie = true }) => {
+const MediaCard: FC<MediaCardProps> = ({ media, isMovie = true, id }) => {
   const [color, setColor] = useState('default')
   const { userStore, generalStore } = useStores()
   const url = `${process.env.IMG_URL}${media.backdrop_path}`
@@ -58,7 +60,7 @@ const MediaCard: FC<MediaCardProps> = ({ media, isMovie = true }) => {
         {!userStore.isNotLogIn && isFilterShown && (
           <div className="my-toggle">
             <Switch
-              checked={color === 'blue'}
+              checked={userStore.savedShows.find((show) => show.id === id)}
               onChange={() => handleChange(event, media.id)}
               color="primary"
               value="dynamic-class-name"

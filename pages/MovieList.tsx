@@ -6,7 +6,6 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 const MoviesList: FunctionComponent = () => {
   const { generalStore, userStore } = useStores()
-
   return (
     <InfiniteScroll
       className="media-container"
@@ -16,7 +15,7 @@ const MoviesList: FunctionComponent = () => {
     >
       {generalStore.movies &&
         generalStore.movies.map((movie) => {
-          return <MediaCard media={movie} key={movie.id} />
+          return <MediaCard media={movie} key={movie.id} id={movie.id} />
         })}
     </InfiniteScroll>
   )
