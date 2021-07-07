@@ -1,6 +1,6 @@
 # DEMO Movie APP
 
-Bootstrap a developer-friendly NextJS app configured with:
+**Tech stack used:**
 
 - [Typescript](https://www.typescriptlang.org/)
 - Linting with [ESLint](https://eslint.org/)
