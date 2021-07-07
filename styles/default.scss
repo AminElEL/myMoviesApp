@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 1) 35%,
+    rgba(213, 213, 213, 1) 100%
+  );
+  margin: 0;
+}
+.header-wrapper {
+  height: 300px;
+  background: rgb(246, 246, 246);
+}
+.movies-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.media-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  box-shadow: 5px 5px 15px 5px #000000;
+  div {
+    min-width: 330px;
+    margin: 20px 5px;
+    background-size: initial;
+    display: flex;
+    flex-direction: column;
+    justify-content: inherit;
+
+    button {
+      cursor: initial;
+    }
+    .my-toggle {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+}
+.root-card {
+  max-width: 345px;
+  box-shadow: 5px 5px 15px 5px #222222 !important;
+  &__media {
+    height: 140px;
+  }
+}
+
+.root-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.filters-container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 80%;
+  flex-wrap: wrap;
+  margin: 0 10px;
+  label {
+    width: 200px;
+  }
+
+  .MuiInputBase-root,
+  .MuiInput-root,
+  .MuiInput-underline,
+  .MuiInputBase-formControl,
+  .MuiInput-formControl {
+    width: 200px;
+    svg {
+      display: none;
+    }
+  }
+}
+.MuiList-root,
+.MuiMenu-list,
+.MuiList-padding {
+  height: 400px;
+}
+
+.popular-movies {
+  background-color: yellow;
+}
+
+.popular-movies,
+.popular-shows,
+.submit-button {
+  font-weight: 900 !important;
+  margin-top: 20px !important;
+}
+.header-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.favorite {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.sign-in-wrapper {
+  position: absolute;
+  top: 40%;
+  height: 300px;
+  width: 500px;
+  border: 2px solid rgba(213, 213, 213, 1);
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+  flex-direction: column;
+  border-radius: 20px;
+  align-items: center;
+  box-shadow: 5px 5px 15px 5px #000000;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+.sign {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+  text-align: center;
+}
+.router-wrapper {
+  display: flex;
+  justify-content: space-evenly;
+  width: 80%;
+}
+.sort-wrapper {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  margin: 30px;
+}
+.sort {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 60px;
+  cursor: pointer;
+}
+
+.title a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+.title a:hover,
+.title a:focus,
+.title a:active {
+  text-decoration: underline;
+}
+
+.title {
+  margin: 0;
+  line-height: 1.15;
+  font-size: 4rem;
+}
+
+.title,
+.description {
+  text-align: center;
+}
+
+.description {
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+
+.my-toggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.log-out-wrapper {
+  text-align: center;
+  padding-left: 20px;
+  .log-out {
+    margin-right: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
