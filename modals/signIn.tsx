@@ -8,12 +8,9 @@ import Button from '@material-ui/core/Button'
 type SingInModalProps = {
   userName: string
 }
-function rand() {
-  return Math.round(Math.random() * 20) - 10
-}
 
 const SingInModal: FC<SingInModalProps> = ({ userName }) => {
-  const { generalStore, userStore } = useStores()
+  const { userStore } = useStores()
   const [open, setOpen] = useState(false)
 
   const handleOpen = () => {
@@ -25,8 +22,7 @@ const SingInModal: FC<SingInModalProps> = ({ userName }) => {
   }
 
   const handleLogOut = () => {
-    localStorage.clear()
-    //userStore.setName(null)
+    userStore.setName(null)
     userStore.removeShows()
     userStore.setLogIn(true)
   }
