@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect, useState } from 'react'
+import React, { FunctionComponent, useEffect } from 'react'
 import MediaCard from '../components/Card'
 import IMedia from '../models/IMedia'
 import api from '../services/UserApi'
@@ -9,11 +9,8 @@ type MoviesListProps = {
   media?: IMedia[]
 }
 
-const FavoriteList: FunctionComponent<MoviesListProps> = ({
-  popularMovies,
-}) => {
-  const { userStore, generalStore } = useStores()
-  const [show, setShow] = useState(false)
+const FavoriteList: FunctionComponent<MoviesListProps> = () => {
+  const { userStore } = useStores()
 
   const getFavorites = async (formatSearch, isMovie) => {
     const shows = await api.getShowsByKeyword(formatSearch, isMovie)
@@ -28,14 +25,13 @@ const FavoriteList: FunctionComponent<MoviesListProps> = ({
       praseForMapping
         .filter((movie) => movie.id)
         .map((movie) => getFavorites(movie.id, movie.isMovie))
-      setShow(true)
     }
   }, [])
   return (
     <div className={'media-container'}>
       {userStore.savedShows.length > 0 ? (
         userStore.savedShows.map((movie) => {
-          return <MediaCard media={movie} key={movie.id} />
+          return <MediaCard media={movie} key={movie.id} id={movie.id} />
         })
       ) : (
         <div style={{ width: '100%' }}>

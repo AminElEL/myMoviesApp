@@ -4,21 +4,23 @@ import api from '../services/UserApi'
 import { useStores } from '../hooks/useStores'
 import { observer } from 'mobx-react-lite'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import IMedia from '../models/IMedia'
+import IGenre from '../models/IGenre'
 
 interface IHomeProps {
   tvShows: IMedia
   genres: IGenre
 }
 
-const TVShows: FunctionComponent = () => {
+const TVShows: FunctionComponent<IHomeProps> = () => {
   const { generalStore } = useStores()
-
   return (
     <InfiniteScroll
       className="media-container"
       dataLength={generalStore.tvShows.length}
       next={generalStore.getNextPageOfTVShows}
       hasMore={true}
+      loader={<div></div>}
     >
       {generalStore.tvShows &&
         generalStore.tvShows.map((tvShow) => (
@@ -33,7 +35,7 @@ const TVShows: FunctionComponent = () => {
   )
 }
 
-export async function getServerSideProps(): any {
+export async function getServerSideProps(): Promise<any> {
   const tvShows = await api.getPopularTVShows()
   const genres = await api.getAllGenres()
 

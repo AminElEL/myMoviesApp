@@ -19,32 +19,27 @@ export class GeneralStore {
 
   public setMovies = (movies: IMovie): void => {
     runInAction(() => {
-      this.movies = movies
+      this.movies.push(movies)
     })
   }
 
   public setTVShows = (tvShows: ITVShow): void => {
     runInAction(() => {
-      this.tvShows = tvShows
+      this.tvShows.push(tvShows)
     })
   }
 
   public setGeners = (genres: IGenre): void => {
-    this.genres = genres
     runInAction(() => {
-      this.genres = genres
+      this.genres.push(genres)
     })
-  }
-
-  public sortShows = (what: string) => {
-    generalStore[what].sort((a, b) => (a.title > b.title && 1) || -1)
   }
 
   public searchByGenreAndYear = async (
     genresID: string,
     selectedYear: string,
     pathname: string
-  ): IMovie | ITVShow => {
+  ): Promise<void> => {
     const isMovies = pathname !== '/TvShowsList'
     let movies = []
     let tvShows = []
@@ -57,7 +52,6 @@ export class GeneralStore {
   }
 
   public sortByName = (pathname: string): void => {
-    const isMovies = pathname !== '/TvShowsList'
     if (pathname !== '/TvShowsList') {
       this.movies.sort((a, b) => (a.title > b.title && 1) || -1)
     } else {
@@ -65,7 +59,7 @@ export class GeneralStore {
     }
   }
 
-  public getSortByRating = async (pathname: string): void => {
+  public getSortByRating = async (pathname: string): Promise<void> => {
     const isMovies = pathname !== '/TvShowsList'
     let movies = []
     let tvShows = []
@@ -77,7 +71,7 @@ export class GeneralStore {
     })
   }
 
-  public sortByReleaseDate = async (pathname: string): void => {
+  public sortByReleaseDate = async (pathname: string): Promise<void> => {
     const isMovies = pathname !== '/TvShowsList'
     let movies = []
     let tvShows = []
@@ -89,7 +83,7 @@ export class GeneralStore {
     })
   }
 
-  public getNextPageOfMovies = async () => {
+  public getNextPageOfMovies = async (): Promise<void> => {
     this.pageIndex++
     const data = await api.getPopularMovies(this.pageIndex)
     runInAction(() => {
@@ -97,7 +91,7 @@ export class GeneralStore {
     })
   }
 
-  public getNextPageOfTVShows = async () => {
+  public getNextPageOfTVShows = async (): Promise<void> => {
     this.pageIndex++
     const data = await api.getPopularTVShows(this.pageIndex)
 
@@ -106,8 +100,11 @@ export class GeneralStore {
     })
   }
 
-  public searchByName = async (searchString: string, pathname: string) => {
-    const isMovies = pathname !== '/TvShowsList'
+  public searchByName = async (
+    searchString: string,
+    pathname: string
+  ): Promise<void> => {
+    const isMovies = pathname !== '/tv-shows'
     let movies = []
     let tvShows = []
     isMovies
@@ -118,7 +115,7 @@ export class GeneralStore {
     })
   }
 
-  public hydrate(data: any) {
+  public hydrate(data: any): void {
     if (data.movies) this.movies = data.movies
     if (data.genres) this.genres = data.genres
     if (data.tvShows) this.tvShows = data.tvShows

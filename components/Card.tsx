@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC } from 'react'
 import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardContent from '@material-ui/core/CardContent'
@@ -9,34 +9,52 @@ import Switch from '@material-ui/core/Switch'
 import { useStores } from '../hooks/useStores'
 import { observer } from 'mobx-react-lite'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import slugify from 'slugify'
+
 type MediaCardProps = {
   media: IMedia
-  isMovie: boolean
+  isMovie?: boolean
   id: number
 }
 
 const MediaCard: FC<MediaCardProps> = ({ media, isMovie = true, id }) => {
-  const [color, setColor] = useState('default')
-  const { userStore, generalStore } = useStores()
+  const { userStore } = useStores()
   const url = `${process.env.IMG_URL}${media.backdrop_path}`
   const pathname = useRouter()
-  const isFilterShown: boolean = pathname.pathname !== '/Favorites'
+  const isFilterShown: boolean =
+    pathname.pathname !== ('/favorites' && '/[...media-details]')
 
-  const handleChange = (event, id) => {
+  const handleChange = (id) => {
     const saveToLocal = {
       id: id,
       isMovie: isMovie,
     }
     userStore.favorites.push(saveToLocal)
+
     localStorage.setItem(userStore.name, JSON.stringify(userStore.favorites))
-    setColor(event.target.checked ? 'blue' : 'default')
   }
+
+  const isMovieFavorite = (): boolean => {
+    const isFavorit = userStore.savedShows.find(
+      (show) => show.id === id
+    ) as unknown
+
+    return isFavorit as boolean
+  }
+
+  const handleCardClick = (title: string): void => {
+    const mediaTitle = slugify(title)
+    // eslint-disable-next-line no-constant-condition
+    const urlPath = pathname.asPath !== '/tv-shows' ? 'movies' : 'tv-shows'
+
+    pathname.push('mediaDetails', `${urlPath}/${mediaTitle}`)
+  }
+
   return (
-    <Card className={'root-card'}>
+    <Card className={'root-card'} raised={true}>
       <CardActionArea>
         <CardMedia className={'root-card__media'} image={`${url}`} />
-        <CardContent>
+        <CardContent onClick={() => handleCardClick(media.title || media.name)}>
           <Typography gutterBottom variant="h5" component="h2">
             {media.title || media.name}
           </Typography>
@@ -60,8 +78,8 @@ const MediaCard: FC<MediaCardProps> = ({ media, isMovie = true, id }) => {
         {!userStore.isNotLogIn && isFilterShown && (
           <div className="my-toggle">
             <Switch
-              checked={userStore.savedShows.find((show) => show.id === id)}
-              onChange={() => handleChange(event, media.id)}
+              checked={isMovieFavorite()}
+              onChange={() => handleChange(media.id)}
               color="primary"
               value="dynamic-class-name"
             />

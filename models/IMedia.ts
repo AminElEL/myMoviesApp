@@ -1,4 +1,6 @@
-interface IMedia {
+import IMovie from './IMovie'
+import ITVShow from './ITVShows'
+interface IMedia extends IMovie,ITVShow  {
   backdrop_path: string
   genre_ids: number[]
   id: number

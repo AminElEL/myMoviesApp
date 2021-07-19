@@ -21,7 +21,7 @@ class Api {
     year: string,
     type: string
   ): Promise<IMovie[]> => {
-    const DISCOVER_API: string = `${process.env.BASE_URL}/discover/{type}?api_key=${process.env.API_KEY}&with_genres={genre}&year={year}`
+    const DISCOVER_API = `${process.env.BASE_URL}/discover/{type}?api_key=${process.env.API_KEY}&with_genres={genre}&year={year}`
     const { data } = await axios.get(
       DISCOVER_API.replace('{type}', type)
         .replace('{genre}', genre)
@@ -32,11 +32,11 @@ class Api {
   }
 
   public getShowsByKeyword = async (
-    id: number,
+    id: string,
     isMovie: boolean
   ): Promise<IMovie[] | ITVShow[]> => {
     const type = isMovie ? 'movie' : 'tv'
-    const SHOWS_BY_KEYWORD: string = `${process.env.BASE_URL}/{type}/{id}?api_key=${process.env.API_KEY}&language=en-US`
+    const SHOWS_BY_KEYWORD = `${process.env.BASE_URL}/{type}/{id}?api_key=${process.env.API_KEY}&language=en-US`
     const { data } = await axios.get(
       SHOWS_BY_KEYWORD.replace('{type}', type).replace('{id}', id)
     )
@@ -44,7 +44,7 @@ class Api {
   }
 
   public getAllGenres = async (): Promise<IGenre[]> => {
-    const GENRES_API: string = `${process.env.BASE_URL}/genre/movie/list?api_key=${process.env.API_KEY}&language=en-US`
+    const GENRES_API = `${process.env.BASE_URL}/genre/movie/list?api_key=${process.env.API_KEY}&language=en-US`
     const { data } = await axios.get(GENRES_API)
 
     return data.genres
@@ -80,6 +80,15 @@ class Api {
     const SORT_BY_DATE = `${process.env.BASE_URL}/discover/{type}?api_key=${process.env.API_KEY}&language=en-US&sort_by={value}&page=1&with_watch_monetization_types=flatrate`
     const { data } = await axios.get(
       SORT_BY_DATE.replace('{type}', type).replace('{value}', value)
+    )
+    return data.results
+  }
+  public getTrailer = async (
+    showId: string,
+    showType: string
+  ): Promise<any> => {
+    const { data } = await axios.get(
+      `https://api.themoviedb.org/3/${showType}/${showId}/videos?api_key=${process.env.API_KEY}`
     )
     return data.results
   }

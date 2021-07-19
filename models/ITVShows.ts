@@ -1,6 +1,5 @@
-import IMedia from './IMedia'
 
-interface ITVShow extends IMedia {
+interface ITVShow {
   first_air_date: string
   original_name: string
   name: string

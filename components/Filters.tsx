@@ -6,16 +6,10 @@ import {
   MenuItem,
   Select,
 } from '@material-ui/core'
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react'
-import IGenre from '../interfaces/IGenre'
+import React, { FunctionComponent, useCallback, useState } from 'react'
+import IGenre from '../models/IGenre'
 import { observer } from 'mobx-react-lite'
 import { useStores } from '../hooks/useStores'
-import api from '../services/UserApi'
 import SingInModal from '../modals/signIn'
 import { useRouter } from 'next/router'
 
@@ -23,7 +17,7 @@ type FilterProps = {
   genres?: IGenre[]
 }
 
-const Filters: FunctionComponent<FilterProps> = ({ genres }) => {
+const Filters: FunctionComponent<FilterProps> = () => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([])
   const [genresID, setGenresID] = useState<string[]>([])
   const [selectedYear, setSelectedYear] = useState<string>('')

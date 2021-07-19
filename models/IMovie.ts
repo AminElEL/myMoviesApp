@@ -1,6 +1,5 @@
-import IMedia from './IMedia'
 
-interface IMovie extends IMedia {
+interface IMovie  {
   adult: boolean
   original_title: string
   release_date: string

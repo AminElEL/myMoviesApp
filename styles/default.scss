@@ -15,8 +15,24 @@ body {
   margin: 0;
 }
 .header-wrapper {
-  height: 300px;
+  height: auto;
   background: rgb(246, 246, 246);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .expand-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+}
+.header-wrapper-small {
+  display: flex;
+  justify-content: center;
+  height: 60px;
+  background: #f6f6f6;
+  align-items: flex-end;
 }
 .movies-container {
   display: flex;
@@ -27,7 +43,36 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  box-shadow: 5px 5px 15px 5px #000000;
+
+  &__mediaDetail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    .backGround {
+      height: 100%;
+      background-image: url(https://image.tmdb.org/t/p/w400/gX5UrH1TLVVBwI7WxplW43BD6Z1.jpg);
+      width: 100%;
+      position: absolute;
+      background-repeat: no-repeat;
+      background-size: cover;
+      opacity: 0.3;
+    }
+    .player {
+      width: 90% !important;
+      height: 400px !important;
+      margin: 20px 0;
+      z-index: 1;
+    }
+    .content {
+      padding: 20px;
+      z-index: 1;
+      display: flex;
+      .text-content {
+        margin: 0 10px;
+      }
+    }
+  }
   div {
     min-width: 330px;
     margin: 20px 5px;
@@ -67,7 +112,7 @@ body {
   justify-content: space-between;
   width: 80%;
   flex-wrap: wrap;
-  margin: 0 10px;
+  margin: 0 10px 20px;
   label {
     width: 200px;
   }
@@ -90,7 +135,7 @@ body {
 }
 
 .popular-movies {
-  background-color: yellow;
+  background-color: #dadad9;
 }
 
 .popular-movies,
@@ -99,12 +144,7 @@ body {
   font-weight: 900 !important;
   margin-top: 20px !important;
 }
-.header-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-evenly;
-}
+
 .favorite {
   display: flex;
   flex-direction: column;
@@ -145,9 +185,8 @@ body {
 }
 .sort-wrapper {
   display: flex;
-  width: 40%;
   justify-content: space-between;
-  margin: 30px;
+  margin-left: 10px;
 }
 .sort {
   display: flex;
@@ -155,6 +194,7 @@ body {
   justify-content: space-between;
   height: 60px;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .title a {
